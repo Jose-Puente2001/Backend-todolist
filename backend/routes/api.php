@@ -18,7 +18,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/task', 'App\Http\Controllers\TaskController@index');
-Route::post('/task/save', 'App\Http\Controllers\TaskController@store');
-Route::put('/task/update/{id}', 'App\Http\Controllers\TaskController@update');
-Route::delete('/task/destroy/{id}', 'App\Http\Controllers\TaskController@destroy');
+
+Route::get('/task', [TaskController::class,'index']);
+Route::post('/task/save', [TaskController::class,'store']);
+Route::put('/task/update/{id}', [TaskController::class,'update']);
+Route::delete('/task/destroy/{id}', [TaskController::class,'destroy']);
+
+
