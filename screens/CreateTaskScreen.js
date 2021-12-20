@@ -6,7 +6,7 @@ import { getFirestore, collection, addDoc } from 'firebase/firestore';
 
 const db = getFirestore();
 
-const CreateTaskScreen = () => {
+const CreateTaskScreen = (props) => {
 
 const [state, setState] = useState({
 
@@ -35,7 +35,8 @@ const addTask = async () =>{
             name: state.name,
             description: state.description
         });
-
+        
+        props.navigation.navigate("Task");
      }
 
      catch (e) {

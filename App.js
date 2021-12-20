@@ -11,8 +11,8 @@ const Stack = createNativeStackNavigator();
 function MyStack(){
   return(
        <Stack.Navigator>
-        <Stack.Screen name="CreateTask" component={CreateTaskScreen} />
         <Stack.Screen name="Task" component={TaskScreen} />
+        <Stack.Screen name="CreateTask" component={CreateTaskScreen} />
       </Stack.Navigator>
     )
 }
