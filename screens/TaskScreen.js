@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView, Button, Text } from 'react-native';
+import { View, ScrollView, Button, Text, FlatList } from 'react-native';
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 import  '../database/Firebase';
 
@@ -24,7 +24,6 @@ querySnapshot.forEach((doc)=>{
 
     })
 
-	console.log(task)
 
 	setTask(task)
 })
@@ -42,18 +41,16 @@ querySnapshot.forEach((doc)=>{
                   
         		/>
         	</View>
-        	{task.map((tasks)=>{
-                 return(
-                 <ScrollView>
-                  <View>
-                  	<Text key="{tasks}">{tasks.name}</Text>
-                  	</View>
+        	<FlatList 
+              data={task}
+              renderItem={({item}) => (
                    <View>
-                   	<Text key="{tasks}">{tasks.description}</Text>
-                   	</View>
-                  </ScrollView>
-                )
-        	})}
+                   	<Text>{item.name}</Text>
+                   	<Text>{item.description}</Text>
+                   </View>
+              )}
+
+        	 />
         </ScrollView>
 
 	)
