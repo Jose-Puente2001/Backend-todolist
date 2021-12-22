@@ -10,8 +10,8 @@ const CreateTaskScreen = (props) => {
 
 const [state, setState] = useState({
 
-  name: "",
-  description: "",
+  name: ""
+  
 
 });
 
@@ -23,7 +23,7 @@ const handleChangeText = (name, value) =>{
 
 
 const addTask = async () =>{
-  if(state.name === "" || state.description === ""){
+  if(state.name === ""){
         alert('please date');
   }
 
@@ -32,8 +32,8 @@ const addTask = async () =>{
   try {
 
        const docRef = await addDoc(collection(db, "task"), {
-            name: state.name,
-            description: state.description
+            name: state.name
+            
         });
         
         props.navigation.navigate("Task");
@@ -53,11 +53,6 @@ const addTask = async () =>{
         <TextInput 
         placeholder="name" 
         onChangeText={(value) => handleChangeText("name", value)} />
-      </View>
-      <View style={styles.input}>
-        <TextInput 
-          placeholder="description" 
-          onChangeText={(value)=> handleChangeText("description", value)}/>
       </View>
       <View style={styles.input}>
         <Button title="Save Task" onPress={() => addTask()}/>

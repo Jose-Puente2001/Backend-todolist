@@ -14,12 +14,11 @@ const querySnapshot = await getDocs(collection(db, 'task'));
 const task = [];
 querySnapshot.forEach((doc)=>{
   
-  const { name, description } = doc.data();
+  const { name } = doc.data();
     task.push({
 
         id: doc.id,
         name,
-        description, 
 
     });
    setTask(task)
@@ -48,7 +47,6 @@ getData();
               renderItem={({item}) => (
                    <View>
                     <Text>{item.name}</Text>
-                    <Text>{item.description}</Text>
                    </View>
               )}
 
