@@ -9,8 +9,7 @@ const TaskScreen =  (props) =>{
 
 const [task, setTask] = useState([]);
 
-useEffect(async() => {
-
+const getData = async () => {
 const querySnapshot = await getDocs(collection(db, 'task'));
 const task = [];
 querySnapshot.forEach((doc)=>{
@@ -20,40 +19,43 @@ querySnapshot.forEach((doc)=>{
 
         id: doc.id,
         name,
-        description
+        description, 
 
-    })
-
-
-	setTask(task)
-})
-
-
-},[])
+    });
+   setTask(task)
+});    
+}
 
 
-	return(
+useEffect(() => {
+  
+getData();
+
+}, []);
+
+
+  return(
         <ScrollView>
-        	<View>
-        		<Button 
+          <View>
+            <Button 
                    title="Create New Task"
                    onPress={() => props.navigation.navigate("CreateTask")}
                   
-        		/>
-        	</View>
-        	<FlatList 
+            />
+          </View>
+          <FlatList 
               data={task}
               renderItem={({item}) => (
                    <View>
-                   	<Text>{item.name}</Text>
-                   	<Text>{item.description}</Text>
+                    <Text>{item.name}</Text>
+                    <Text>{item.description}</Text>
                    </View>
               )}
 
-        	 />
+           />
         </ScrollView>
 
-	)
+  )
 }
 
 export default TaskScreen;

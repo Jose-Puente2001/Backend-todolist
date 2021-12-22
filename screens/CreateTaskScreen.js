@@ -10,8 +10,8 @@ const CreateTaskScreen = (props) => {
 
 const [state, setState] = useState({
 
-	name: "",
-	description: "",
+  name: "",
+  description: "",
 
 });
 
@@ -23,13 +23,13 @@ const handleChangeText = (name, value) =>{
 
 
 const addTask = async () =>{
-	if(state.name === "" || state.description === ""){
+  if(state.name === "" || state.description === ""){
         alert('please date');
-	}
+  }
 
-	else{
+  else{
 
-	try {
+  try {
 
        const docRef = await addDoc(collection(db, "task"), {
             name: state.name,
@@ -41,29 +41,29 @@ const addTask = async () =>{
 
      catch (e) {
        console.error("Error adding document: ", e)
-	}
+  }
 
    }
 }
 
 
-	return(
-	<ScrollView style={styles.container}>
+  return(
+  <ScrollView style={styles.container}>
       <View style={styles.input}>
-      	<TextInput 
-      	placeholder="name" 
-      	onChangeText={(value) => handleChangeText("name", value)} />
+        <TextInput 
+        placeholder="name" 
+        onChangeText={(value) => handleChangeText("name", value)} />
       </View>
       <View style={styles.input}>
-      	<TextInput 
+        <TextInput 
           placeholder="description" 
           onChangeText={(value)=> handleChangeText("description", value)}/>
       </View>
       <View style={styles.input}>
-      	<Button title="Save Task" onPress={() => addTask()}/>
+        <Button title="Save Task" onPress={() => addTask()}/>
       </View>
     </ScrollView>
-	)
+  )
 }
 
 const styles = StyleSheet.create({
@@ -87,5 +87,4 @@ input: {
 
 
 export default CreateTaskScreen;
-
 
