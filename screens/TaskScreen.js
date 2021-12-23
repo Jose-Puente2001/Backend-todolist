@@ -35,6 +35,18 @@ getData();
 }, []);
 
 
+const renderItem = ({item}) =>{
+  return(
+  <View>
+    <CheckBox 
+      title={item.name}
+      checked={check}
+      onPress={() => setCheck(!check)}
+        />
+   </View>   
+  )
+}
+
   return(
         <ScrollView>
           <View>
@@ -46,17 +58,8 @@ getData();
           </View>
           <FlatList 
               data={task}
-              renderItem={({item}) => (
-                   <View>
-                    <CheckBox 
-                       title={item.name}
-                       checked={check}
-                       onPress={() => setCheck(!check)}
-
-                     />
-                  </View>
-              )}
-
+              renderItem={renderItem}
+              keyExtractor={item => item.id}
            />
         </ScrollView>
 
