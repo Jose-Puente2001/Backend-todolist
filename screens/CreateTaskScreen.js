@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { View, Button, TextInput, StyleSheet, ScrollView } from 'react-native';
-import  '../database/Firebase';
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import db from '../database/Firebase';
+import { collection, addDoc } from 'firebase/firestore';
 
-
-const db = getFirestore();
 
 const CreateTaskScreen = (props) => {
 

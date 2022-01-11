@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { View, ScrollView, Button, Text, FlatList } from 'react-native';
-import { CheckBox } from 'react-native-elements';
-import { getFirestore, collection, getDocs } from "firebase/firestore";
-import  '../database/Firebase';
+import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
+import db from '../database/Firebase';
 
-const db = getFirestore();
 
 const TaskScreen =  (props) =>{
 
 const [task, setTask] = useState([]);
-const [check, setCheck] = useState(false);
+
 
 const getData = async () => {
 const querySnapshot = await getDocs(collection(db, 'task'));
@@ -35,14 +33,18 @@ getData();
 }, []);
 
 
+
+const onDeleteTask = async (id) => {
+
+await deleteDoc(doc(db, 'task', id));
+
+}
+
 const renderItem = ({item}) =>{
   return(
   <View>
-    <CheckBox 
-      title={item.name}
-      checked={check}
-      onPress={() => setCheck(!check)}
-        />
+    <Text>{item.name}</Text>
+    <Button title="Delete" onPress={() => onDeleteTask(item.id)}/>
    </View>   
   )
 }
@@ -59,7 +61,6 @@ const renderItem = ({item}) =>{
           <FlatList 
               data={task}
               renderItem={renderItem}
-              keyExtractor={item => item.id}
            />
         </ScrollView>
 
