@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView, Button, Text, FlatList } from 'react-native';
+import { View, ScrollView, Button, Text, FlatList, StyleSheet } from 'react-native';
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
+import { IconButton, Colors } from 'react-native-paper';
 import db from '../database/Firebase';
 
 
@@ -42,9 +43,14 @@ await deleteDoc(doc(db, 'task', id));
 
 const renderItem = ({item}) =>{
   return(
-  <View>
-    <Text>{item.name}</Text>
-    <Button title="Delete" onPress={() => onDeleteTask(item.id)}/>
+  <View style={styles.container}>
+    <Text style={styles.titletask}>{item.name}</Text>
+    <IconButton
+      icon="trash-can"
+      color={Colors.red500}
+      size={20}
+      onPress={() => onDeleteTask(item.id)}
+    />
    </View>   
   )
 }
@@ -58,7 +64,7 @@ const renderItem = ({item}) =>{
                   
             />
           </View>
-          <FlatList 
+             <FlatList 
               data={task}
               renderItem={renderItem}
            />
@@ -66,5 +72,26 @@ const renderItem = ({item}) =>{
 
   )
 }
+
+const styles = StyleSheet.create({
+
+container: {
+
+paddingTop: 20,
+flexDirection: "row",
+justifyContent: "space-evenly",
+
+},
+
+
+titletask:{
+
+marginTop: 10,
+
+}
+
+
+})
+
 
 export default TaskScreen;
