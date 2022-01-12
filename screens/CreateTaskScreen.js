@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Button, TextInput, StyleSheet, ScrollView } from 'react-native';
+import { View, Button, TextInput, StyleSheet, ScrollView, Alert } from 'react-native';
 import db from '../database/Firebase';
 import { collection, addDoc } from 'firebase/firestore';
 
@@ -22,7 +22,15 @@ const handleChangeText = (name, value) =>{
 
 const addTask = async () =>{
   if(state.name === ""){
-        alert('please date');
+        Alert.alert(
+        "Please enter the name of the task", 
+        "You cannot send the form with the field empty",
+        [
+          
+          {text: 'OK'},
+
+        ],
+     );
   }
 
   else{

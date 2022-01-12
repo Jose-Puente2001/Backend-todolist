@@ -1,19 +1,20 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore'
 
+
 const firebaseConfig = {
 
-  apiKey: "AIzaSyAEYG6m39yIEoPLeNq-_9QQZAWlD1o_1T0",
+  apiKey: "AIzaSyCO5RpR3rTm51ol03LdAkpTGlMr_n3HK-4",
 
-  authDomain: "simple-todo-list-2717f.firebaseapp.com",
+  authDomain: "todo-list-62fff.firebaseapp.com",
 
-  projectId: "simple-todo-list-2717f",
+  projectId: "todo-list-62fff",
 
-  storageBucket: "simple-todo-list-2717f.appspot.com",
+  storageBucket: "todo-list-62fff.appspot.com",
 
-  messagingSenderId: "165874620986",
+  messagingSenderId: "335624627785",
 
-  appId: "1:165874620986:web:1f11425929ce8675953303"
+  appId: "1:335624627785:web:4567217c711b86c656c198"
 
 };
 

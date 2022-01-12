@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView, Button, Text, FlatList, StyleSheet, RefreshControl } from 'react-native';
+import { View, ScrollView, Button, Text, FlatList, StyleSheet, Alert, RefreshControl } from 'react-native';
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { IconButton, Colors } from 'react-native-paper';
 import db from '../database/Firebase';
@@ -27,6 +27,29 @@ querySnapshot.forEach((doc)=>{
 });    
 }
 
+const onDeleteTask = (id) => {
+
+Alert.alert("Delete Task", "Are you sure you want to delete the task", [
+
+{
+ 
+ text: "Cancel",
+ style: "cancel",
+
+},
+{
+
+text: "OK",
+onPress: async () => {
+  
+await deleteDoc(doc(db, 'task', id));
+await getData();
+
+}
+}
+])
+}
+
 
 useEffect(() => {
   
@@ -34,13 +57,6 @@ getData();
 
 }, []);
 
-
-
-const onDeleteTask = async (id) => {
-
-await deleteDoc(doc(db, 'task', id));
-
-}
 
 const renderItem = ({item}) =>{
   return(
