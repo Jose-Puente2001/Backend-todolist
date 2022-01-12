@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView, Button, Text, FlatList, StyleSheet } from 'react-native';
+import { View, ScrollView, Button, Text, FlatList, StyleSheet, RefreshControl } from 'react-native';
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { IconButton, Colors } from 'react-native-paper';
 import db from '../database/Firebase';
@@ -8,6 +8,7 @@ import db from '../database/Firebase';
 const TaskScreen =  (props) =>{
 
 const [task, setTask] = useState([]);
+const [refreshing, setRefreshing] = useState(false);
 
 
 const getData = async () => {
@@ -55,6 +56,15 @@ const renderItem = ({item}) =>{
   )
 }
 
+
+const onRefresh = React.useCallback (async() => {
+  
+  setRefreshing(true);
+  await getData();
+  setRefreshing(false);
+
+})
+
   return(
         <ScrollView>
           <View>
@@ -67,6 +77,14 @@ const renderItem = ({item}) =>{
              <FlatList 
               data={task}
               renderItem={renderItem}
+              refreshcontrol={
+                <RefreshControl
+                  colors={["#51d1f6"]}
+                  onRefresh={onRefresh}
+                  refreshing={refreshing}
+
+                />
+              }
            />
         </ScrollView>
 
@@ -77,9 +95,10 @@ const styles = StyleSheet.create({
 
 container: {
 
-paddingTop: 20,
+padding: 20,
 flexDirection: "row",
-justifyContent: "space-evenly",
+justifyContent: "space-between",
+alignItems: "center",
 
 },
 
