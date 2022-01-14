@@ -79,7 +79,7 @@ const onRefresh = React.useCallback (async() => {
   await getData();
   setRefreshing(false);
 
-})
+}, []);
 
   return(
         <ScrollView>
